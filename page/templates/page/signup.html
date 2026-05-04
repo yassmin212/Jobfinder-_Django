@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - JobFinder</title>
+    <style>
+        .msg { font-weight: bold; margin-bottom: 10px; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+    <link rel="stylesheet" href="cssFiles/style.css">
+</head>
+<body>
+    <header>
+        <div><h1 class="logo">Job<span>Finder</span></h1></div>
+
+        <div class="menu-icon" id="menu-btn">&#9776;</div>
+
+        <nav class="nav-bar" id="nav-menu">   
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="jobs.html">Find Jobs</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="signup-msg" class="msg"></div>
+
+        <form id="signupForm">
+            <table>
+                <tr>
+                    <td><label for="fname">First name</label></td>
+                    <td><input type="text" id="fname" name="fname" placeholder="First name"></td>
+                </tr>
+                <tr>
+                    <td><label for="lname">Last name</label></td>
+                    <td><input type="text" id="lname" name="lname" placeholder="Last name"></td>
+                </tr>
+                <tr>
+                    <td><label for="Username">Username</label></td>
+                    <td><input type="text" id="Username" name="Username"></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="text" id="email" name="email" placeholder="YourEmail@example.com"></td>
+                </tr>
+                <tr>
+                    <td><label for="CPword">Create password</label></td>
+                    <td><input type="password" id="CPword" name="CPword"></td>
+                </tr>
+                <tr>
+                    <td><label for="CPword2">Confirm password</label></td>
+                    <td><input type="password" id="CPword2" name="CPword2"></td>
+                </tr>
+                <tr>
+                    <td><label for="cname">Company name</label></td>
+                    <td><input type="text" id="cname" name="cname"></td>
+                </tr>
+                <tr>
+                    <td><label for="admin_checkbox">Admin</label></td>
+                    <td><input type="checkbox" id="admin_checkbox" name="admin_checkbox"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Sign Up"></td>
+                </tr>
+            </table>     
+        </form>
+    </main>
+    <br>
+    <footer>
+        &copy; 2026 JobFinder. All rights reserved.
+    </footer>
+
+   
+    <script src="jsFiles/auth.js"></script>
+    <script src="jsFiles/main.js"></script>
+</body>
+</html>

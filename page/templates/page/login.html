@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cssFiles/style.css">
+    <title>Login - JobFinder</title>
+ 
+   <style>
+        .msg { font-weight: bold; margin-bottom: 10px; }
+        .error { color: red; }
+        .success { color: green; }
+        
+       
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div><h1 class="logo">Job<span>Finder</span></h1></div>
+
+        <div class="menu-icon" id="menu-btn">&#9776;</div>
+
+        <nav class="nav-bar" id="nav-menu">   
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="jobs.html">Find Jobs</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+      
+        <div id="login-msg" class="msg"></div>
+        
+        <form id="loginForm">
+            <table>
+                <tr>
+                    <td><label for="uname">Username</label></td>
+                    <td><input type="text" id="uname" name="uname" placeholder="Your name"></td>
+                </tr>
+                <tr>
+                    <td><label for="pword">Password</label></td>
+                    <td><input type="password" id="pword" name="pword"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="login"></td>
+                </tr>
+            </table>
+        </form>
+
+        <h3>Don't have an account?</h3>
+        <p><a href="signup.html">Sign up</a></p>
+        <p><a href="index.html">Home</a></p>
+    </main>
+    
+    <footer>
+        &copy; 2026 JobFinder. All rights reserved.
+    </footer>
+    
+    <script src="jsFiles/auth.js"></script>
+    <script src="jsFiles/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cssFiles/style.css">
+
+    <link rel="stylesheet" href="cssFiles/admin-dashboard.css">
+
+    <title>Admin Dashboard</title>
+   </head>
+<body>
+    <header>
+       <div><h1 class="logo">Job<span>Finder</span></h1></div>
+
+        <div class="menu-icon" id="menu-btn">&#9776;</div>
+
+        <nav class="nav-bar" id="nav-menu">   
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="admin-dashboard.html">Dashboard</a></li>
+                <li><a href="admin-jobs.html">Company Jobs</a></li>
+                <li><a href="add-job.html">Add New Job</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="dashboard-wrapper">
+         <aside>
+          <h3>Admin Panel</h3>
+          <ul>
+        <li><a href="admin-dashboard.html" class="active-link">📊 Dashboard Overview</a></li>
+        <li><a href="admin-jobs.html">💼 Manage Jobs</a></li>
+        <li><a href="add-job.html">➕ Add New Job</a></li>
+        <li><a href="applied-jobs.html">📩 Applied Jobs</a></li> 
+
+        <li><a href="jobs.html" target="_blank">🌐 View Site (Jobs)</a></li>
+        <li><a href="index.html">🏠 Home Page</a></li>
+        
+        
+
+        <li><a href="login.html" style="color: #991b1b;">🚪 Logout</a></li>
+    </ul>
+   </aside>
+
+        <main class="admin-main-content">
+            <h2>General Statistics </h2>
+            
+            <div class="stats-container">
+                <div class="card">
+                    <h3>Number of Open Jobs</h3>
+                    <p><strong id="open-jobs-count">0</strong></p>
+                </div>
+
+                <div class="card">
+                    <h3>Number of Closed Jobs</h3>
+                    <p><strong id="closed-jobs-count">0</strong></p>
+                </div>
+
+                <div class="card">
+                    <h3>Daily Visitors</h3>
+                    <p><strong>150</strong></p>
+                </div>
+                
+                <div class="card">
+                  <h3>Total Applications</h3>
+                 <p><strong>45</strong></p>
+                </div>
+
+               
+            </div>
+        </main>
+      </div>
+    <footer>
+        &copy; 2026 JobFinder. All rights reserved.
+    </footer>
+    <script src="jsFiles/main.js"></script>
+    <script src="jsFiles/admin.js"></script>
+</body>
+</html>

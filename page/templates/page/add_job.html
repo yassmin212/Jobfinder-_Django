@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="cssFiles/add-job-style.css">
+    <!-- <link rel="stylesheet" href="cssFiles/style.css"> -->
+    
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Add Job</title>
+</head>
+
+<body>
+
+
+<header>
+    <div><h1 class="logo">Job<span>Finder</span></h1></div>
+
+    <div class="menu-icon" id="menu-btn">&#9776;</div>
+
+    <nav class="nav-bar" id="nav-menu">        
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="admin-dashboard.html">Dashboard</a></li>
+            <li><a href="admin-jobs.html">Company Jobs</a></li>
+            <li><a href="add-job.html">Add New Job</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<div class="Job-Form">
+    <div class="container py-5 m-auto text-success">
+
+        <label>Job Name:</label>
+        <input type="text" class="form-control mb-2" id="jobName">
+
+        <label>Company:</label>
+        <input type="text" class="form-control mb-2" id="campany">
+
+        <label>Salary:</label>
+        <input type="number" class="form-control mb-2" id="salary">
+
+        <label>Experience:</label>
+        <input type="number" class="form-control mb-2" id="experience">
+
+        <label>Status:</label>
+        <select class="form-control mb-4" id="options">
+            <option value="Open">Open</option>
+            <option value="Closed">Closed</option>
+        </select>
+
+        <label>Job Type:</label>
+        <select class="form-control mb-5" id="type">
+            <option value="Full-Time">Full-Time</option>
+            <option value="Part-Time">Part-Time</option>
+        </select>
+
+        
+        <button type="button" onclick="addJOB()" class="btn  w-100">
+            Add Job
+        </button>
+
+    </div>
+</div>
+
+
+<div class="displayed">
+    <h2 class="text-center mb-5">JOB YOU Added</h2>
+
+    
+    <div class="jobs-container" id="jobs-container"></div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script_addJob.js"></script>
+
+<footer class="text-center mt-5">
+    &copy; 2026 JobFinder. All rights reserved.
+</footer>
+
+</body>
+</html>

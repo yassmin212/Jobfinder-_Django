@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cssFiles/style.css">
+    <script src="jsFiles/jobs.js" defer></script>
+    <title>Browse Jobs</title>
+    </head>
+<body>
+    <header>
+        <div><h1 class="logo">Job<span>Finder</span></h1></div>
+
+        <div class="menu-icon" id="menu-btn">&#9776;</div>
+
+        <nav class="nav-bar" id="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="jobs.html">Find Jobs</a></li>
+                <li><a href="applied-jobs.html">Applied Jobs</a></li>
+                <li><a href="index.html"><button>Logout</button></a></li>
+            </ul>
+        </nav>
+    </header>
+
+   <!-- ================= SEARCH SECTION ================= -->
+   <section class="search-section"> 
+    <h2>Find Your Next Job</h2>
+
+        <form class="search-form" >
+
+            <div class="form-group">
+                <label for="jobTitle">Job Title</label>
+                <input type="text" id="jobTitle" name="jobTitle"
+                       placeholder="Enter job title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Years of Experience</label>
+                <input type="number" id="experience" name="experience"
+                       min="0" placeholder="0">
+            </div>
+            <div class="form-group">
+
+<label>Status</label>
+
+<select id="statusFilter">
+
+<option value="all">All</option>
+<option value="open">Open</option>
+<option value="closed">Closed</option>
+
+</select>
+
+</div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-primary">Search</button>
+            </div>
+            </form>
+    </section>
+ <!-- ================= JOBS LIST =================-->
+      <section class="jobs-container">
+
+               <!-- Job Card 1 -->
+
+   <article class="job-card"
+data-title="Frontend Developer"
+data-experience="2"
+data-status="open">
+
+<h3>Frontend Developer</h3>
+
+<p class="posted-date">
+<strong>Posted:</strong> 22 Feb 2026
+</p>
+
+<p><strong>Company:</strong> Tech Solutions</p>
+
+<p><strong>Salary:</strong> 12000 EGP</p>
+
+<p><strong>Experience Required:</strong> 2 Years</p>
+
+<p><strong>Job Type:</strong> Full-time</p>
+
+<p><strong>Status:</strong>
+<span class="status open">Open</span>
+</p>
+
+<a href="job1-details.html">
+<button class="btn-secondary">View Details</button>
+</a>
+
+</article>
+
+          <!-- Job Card 2 -->
+       <article class="job-card"
+data-title="Backend Developer"
+data-experience="3"
+data-status="closed">
+
+<h3>Backend Developer</h3>
+
+<p class="posted-date">
+<strong>Posted:</strong> 20 Feb 2026
+</p>
+
+<p><strong>Company:</strong> Smart Systems</p>
+
+<p><strong>Salary:</strong> 15000 EGP</p>
+
+<p><strong>Experience Required:</strong> 3 Years</p>
+
+<p><strong>Job Type:</strong> Full-time</p>
+
+<p><strong>Status:</strong>
+<span class="status closed">Closed</span>
+</p>
+
+<a href="job2-details.html">
+<button class="btn-secondary">View Details</button>
+</a>
+
+</article>
+
+        
+        <!-- Job Card 3 -->
+   <article class="job-card"
+data-title="UI/UX Designer"
+data-experience="1"
+data-status="open">
+
+<h3>UI/UX Designer</h3>
+
+<p class="posted-date">
+<strong>Posted:</strong> 25 Feb 2026
+</p>
+
+<p><strong>Company:</strong> Creative Studio</p>
+
+<p><strong>Salary:</strong> 9000 EGP</p>
+
+<p><strong>Experience Required:</strong> 1 Year</p>
+
+<p><strong>Job Type:</strong> Part-time</p>
+
+<p><strong>Status:</strong>
+<span class="status open">Open</span>
+</p>
+
+<a href="job3-details.html">
+<button class="btn-secondary">View Details</button>
+</a>
+
+</article>
+    </section> 
+
+    <h3 id="noJobsMessage">⚠ No Jobs Found</h3>
+    <footer>
+        &copy; 2026 JobFinder. All rights reserved.
+    </footer>
+    <script src="jsFiles/main.js"></script>
+</body>
+</html>
