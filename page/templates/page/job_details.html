@@ -1,0 +1,268 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="/static/cssFiles/jobs.css">
+
+    <title>
+
+        {{ job.name }} | JobFinder
+
+    </title>
+
+</head>
+
+<body>
+
+<header>
+
+    <div>
+
+        <h1 class="logo">
+
+            Job<span>Finder</span>
+
+        </h1>
+
+    </div>
+
+    <div class="menu-icon"
+         id="menu-btn">
+
+        &#9776;
+
+    </div>
+
+    <nav class="nav-bar"
+         id="nav-menu">
+
+        <ul>
+
+            <li>
+                <a href="/">Home</a>
+            </li>
+
+            <li>
+                <a href="/jobs/">Find Jobs</a>
+            </li>
+
+            <li>
+                <a href="#">Applied Jobs</a>
+            </li>
+
+            <li>
+
+                <a href="/">
+
+                    <button>
+
+                        Logout
+
+                    </button>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<!-- ================= JOB DETAILS ================= -->
+
+<section class="job-details-container">
+
+<article class="job-details-card">
+
+    <!-- ===== Header ===== -->
+
+    <header class="job-header">
+
+        <h2>
+
+            {{ job.name }}
+
+        </h2>
+
+        <p class="posted-date">
+
+            {{ job.posted_date|date:"d M Y" }}
+
+        </p>
+
+    </header>
+
+    <!-- ===== Job Information ===== -->
+
+    <section class="job-info-section">
+
+        <h3>
+
+            Job Information
+
+        </h3>
+
+        <div class="job-meta">
+
+            <p>
+
+                <strong>Company:</strong>
+
+                {{ job.company }}
+
+            </p>
+
+            <p>
+
+                <strong>Salary:</strong>
+
+                {{ job.salary }} EGP
+
+            </p>
+
+            <p>
+
+                <strong>Experience Required:</strong>
+
+                {{ job.experience }} Years
+
+            </p>
+
+            <p>
+
+                <strong>Job Type:</strong>
+
+                {{ job.job_type }}
+
+            </p>
+
+            <p>
+
+                <strong>Status:</strong>
+
+                <span class="status {{ job.status|lower }}">
+
+                    {{ job.status }}
+
+                </span>
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ===== Description ===== -->
+
+    <section class="job-description-section">
+
+        <h3>
+
+            Job Description
+
+        </h3>
+
+        <p>
+
+            {{ job.description }}
+
+        </p>
+
+    </section>
+
+    <!-- ===== Responsibilities ===== -->
+
+    <section class="job-section">
+        
+        <h3>
+
+            Responsibilities
+
+        </h3>
+
+   <ul>
+
+{% for line in job.responsibilities.splitlines %}
+
+<li>
+
+{{ line }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+    </section>
+
+    <!-- ===== Requirements ===== -->
+
+    <section class="job-section">
+
+        <h3>
+
+            Requirements
+
+        </h3>
+<ul>
+
+{% for line in job.requirements.splitlines %}
+
+<li>
+
+{{ line }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+    </section>
+
+    <!-- ===== Apply Section ===== -->
+
+    <section class="apply-section">
+
+        <button class="btn-primary">
+
+            Apply Now
+
+        </button>
+
+        <a href="/jobs/"
+           class="back-btn">
+
+            Back to Jobs
+
+        </a>
+
+    </section>
+
+</article>
+
+</section>
+
+<footer>
+
+    &copy; 2026 JobFinder.
+    All rights reserved.
+
+</footer>
+
+<script src="/static/jsFiles/main.js"></script>
+
+</body>
+
+</html>

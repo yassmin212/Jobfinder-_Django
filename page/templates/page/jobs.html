@@ -1,164 +1,275 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cssFiles/style.css">
-    <script src="jsFiles/jobs.js" defer></script>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="/static/cssFiles/jobs.css">
+          <script src="/static/jsFiles/jobs.js"></script>
+
     <title>Browse Jobs</title>
-    </head>
+
+</head>
+
 <body>
-    <header>
-        <div><h1 class="logo">Job<span>Finder</span></h1></div>
 
-        <div class="menu-icon" id="menu-btn">&#9776;</div>
+<header>
 
-        <nav class="nav-bar" id="nav-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="jobs.html">Find Jobs</a></li>
-                <li><a href="applied-jobs.html">Applied Jobs</a></li>
-                <li><a href="index.html"><button>Logout</button></a></li>
-            </ul>
-        </nav>
-    </header>
+    <div>
+        <h1 class="logo">
+            Job<span>Finder</span>
+        </h1>
+    </div>
 
-   <!-- ================= SEARCH SECTION ================= -->
-   <section class="search-section"> 
+    <div class="menu-icon" id="menu-btn">
+        &#9776;
+    </div>
+
+    <nav class="nav-bar" id="nav-menu">
+
+        <ul>
+
+            <li>
+                <a href="/">Home</a>
+            </li>
+
+            <li>
+                <a href="/jobs/">Find Jobs</a>
+            </li>
+
+            <li>
+                <a href="#">Applied Jobs</a>
+            </li>
+
+            <li>
+                <a href="/">
+                    <button>Logout</button>
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<!-- ================= SEARCH SECTION ================= -->
+
+<section class="search-section">
+
     <h2>Find Your Next Job</h2>
 
-        <form class="search-form" >
+    <form class="search-form" method="GET">
 
-            <div class="form-group">
-                <label for="jobTitle">Job Title</label>
-                <input type="text" id="jobTitle" name="jobTitle"
-                       placeholder="Enter job title" required>
-            </div>
+        <!-- Job Title -->
 
-            <div class="form-group">
-                <label for="experience">Years of Experience</label>
-                <input type="number" id="experience" name="experience"
-                       min="0" placeholder="0">
-            </div>
-            <div class="form-group">
+        <div class="form-group">
 
-<label>Status</label>
+            <label for="jobTitle">
 
-<select id="statusFilter">
+                Job Title
 
-<option value="all">All</option>
-<option value="open">Open</option>
-<option value="closed">Closed</option>
+            </label>
 
-</select>
+            <input type="text"
+                   id="jobTitle"
+                   name="title"
+                   value="{{ title }}"
+                   placeholder="Enter job title">
 
-</div>
+        </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn-primary">Search</button>
-            </div>
-            </form>
-    </section>
- <!-- ================= JOBS LIST =================-->
-      <section class="jobs-container">
+        <!-- Experience -->
 
-               <!-- Job Card 1 -->
+        <div class="form-group">
 
-   <article class="job-card"
-data-title="Frontend Developer"
-data-experience="2"
-data-status="open">
+            <label for="experience">
 
-<h3>Frontend Developer</h3>
+                Years of Experience
 
-<p class="posted-date">
-<strong>Posted:</strong> 22 Feb 2026
-</p>
+            </label>
 
-<p><strong>Company:</strong> Tech Solutions</p>
+            <input type="number"
+                   id="experience"
+                   name="experience"
+                   value="{{ experience }}"
+                   min="0"
+                   placeholder="0">
 
-<p><strong>Salary:</strong> 12000 EGP</p>
+        </div>
 
-<p><strong>Experience Required:</strong> 2 Years</p>
+        <!-- Status -->
 
-<p><strong>Job Type:</strong> Full-time</p>
+        <div class="form-group">
 
-<p><strong>Status:</strong>
-<span class="status open">Open</span>
-</p>
+            <label>Status</label>
 
-<a href="job1-details.html">
-<button class="btn-secondary">View Details</button>
-</a>
+            <select id="statusFilter"
+                    name="status">
+
+                <option value="all"
+
+                {% if status == "all" %}
+                selected
+                {% endif %}>
+
+                All
+
+                </option>
+
+                <option value="open"
+
+                {% if status == "open" %}
+                selected
+                {% endif %}>
+
+                Open
+
+                </option>
+
+                <option value="closed"
+
+                {% if status == "closed" %}
+                selected
+                {% endif %}>
+
+                Closed
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- Search Button -->
+
+        <div class="form-group">
+
+            <button type="submit"
+                    class="btn-primary">
+
+                Search
+
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+<!-- ================= JOBS LIST ================= -->
+
+<section class="jobs-container">
+  
+
+{% for job in jobs %}
+
+<article class="job-card"
+
+data-title="{{ job.name }}"
+data-experience="{{ job.experience }}"
+data-status="{{ job.status|lower }}">
+
+    <h3>
+
+        {{ job.name }}
+
+    </h3>
+
+    <p class="posted-date">
+
+        <strong>Posted:</strong>
+
+        22 Feb 2026
+
+    </p>
+
+    <p>
+
+        <strong>Company:</strong>
+
+        {{ job.company }}
+
+    </p>
+
+    <p>
+
+        <strong>Salary:</strong>
+
+        {{ job.salary }} EGP
+
+    </p>
+
+    <p>
+
+        <strong>Experience Required:</strong>
+
+        {{ job.experience }} Years
+
+    </p>
+
+    <p>
+
+        <strong>Job Type:</strong>
+
+        {{ job.job_type }}
+
+    </p>
+
+    <p>
+
+        <strong>Status:</strong>
+
+        <span class="status {{ job.status|lower }}">
+
+            {{ job.status }}
+
+        </span>
+
+    </p>
+
+    <a href="{% url 'job_details' job.id %}">
+
+        <button class="btn-secondary">
+
+            View Details
+
+        </button>
+
+    </a>
 
 </article>
 
-          <!-- Job Card 2 -->
-       <article class="job-card"
-data-title="Backend Developer"
-data-experience="3"
-data-status="closed">
+{% empty %}
 
-<h3>Backend Developer</h3>
+<h3 id="noJobsMessage">
 
-<p class="posted-date">
-<strong>Posted:</strong> 20 Feb 2026
-</p>
+    ⚠ No Jobs Found
 
-<p><strong>Company:</strong> Smart Systems</p>
+</h3>
 
-<p><strong>Salary:</strong> 15000 EGP</p>
+{% endfor %}
 
-<p><strong>Experience Required:</strong> 3 Years</p>
+</section>
 
-<p><strong>Job Type:</strong> Full-time</p>
+<footer>
 
-<p><strong>Status:</strong>
-<span class="status closed">Closed</span>
-</p>
+    &copy; 2026 JobFinder.
+    All rights reserved.
 
-<a href="job2-details.html">
-<button class="btn-secondary">View Details</button>
-</a>
+</footer>
 
-</article>
+<script src="/static/jsFiles/main.js"></script>
 
-        
-        <!-- Job Card 3 -->
-   <article class="job-card"
-data-title="UI/UX Designer"
-data-experience="1"
-data-status="open">
-
-<h3>UI/UX Designer</h3>
-
-<p class="posted-date">
-<strong>Posted:</strong> 25 Feb 2026
-</p>
-
-<p><strong>Company:</strong> Creative Studio</p>
-
-<p><strong>Salary:</strong> 9000 EGP</p>
-
-<p><strong>Experience Required:</strong> 1 Year</p>
-
-<p><strong>Job Type:</strong> Part-time</p>
-
-<p><strong>Status:</strong>
-<span class="status open">Open</span>
-</p>
-
-<a href="job3-details.html">
-<button class="btn-secondary">View Details</button>
-</a>
-
-</article>
-    </section> 
-
-    <h3 id="noJobsMessage">⚠ No Jobs Found</h3>
-    <footer>
-        &copy; 2026 JobFinder. All rights reserved.
-    </footer>
-    <script src="jsFiles/main.js"></script>
 </body>
+
 </html>
