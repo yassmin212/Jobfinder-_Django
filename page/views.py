@@ -37,10 +37,6 @@ def search_results(request):
 def signup(request):
     return render(request, 'page/signup.html')
 
-# def jobs(request):
-#     all_jobs = Job.objects.all()
-#     return render(request, 'page/jobs.html', {'jobs_list': all_jobs})
-
 def jobs(request):
     all_jobs = Job.objects.all()
     title_search = request.GET.get('title')
