@@ -7,66 +7,47 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Applied Jobs</title>
         <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
+        <link rel="stylesheet" href="{% static 'cssFiles/jobs.css' %}">
     </head>
 
     <body>
         <header>
-        <!--==============Navigation bar===============-->
             <div><h1 class="logo">Job<span>Finder</span></h1></div>
-
             <div class="menu-icon" id="menu-btn">&#9776;</div>
-
             <nav class="nav-bar" id="nav-menu">   
                 <ul class="nav-links">
                     <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'jobs' %}">Find Jobs</a></li>
                     <li><a href="{% url 'applied_jobs' %}">Applied Jobs</a></li>
-                    <li><a href="{% url 'login' %}"><button>Logout</button></a></li>
+                    <li><a href="{% url 'logout' %}"><button>Logout</button></a></li>
                 </ul>
             </nav>
         </header>
-        <div class="container">
 
-            <h2>Applied Jobs</h2>
+        <div class="container" style="min-height: 60vh; padding: 40px;">
+            <h2 style="text-align: center; margin-bottom: 30px;">Applied Jobs</h2>
 
-            <div class="job-list" id="appliedContainer"></div>
-
-        </div>
-        <footer>
-        &copy; 2026 JobFinder. All rights reserved.
-    </footer>
-    <script>
-    document.addEventListener("DOMContentLoaded", function(){
-
-    let appliedJobs = JSON.parse(localStorage.getItem("appliedJobs")) || [];
-    let container = document.querySelector(".job-list");
-
-    if(appliedJobs.length === 0){
-        return;
-    }
-
-    appliedJobs.forEach(jobName => {
-
-        container.innerHTML += `
-        <div class="job-card">
-            <div class="job-logo"></div>
-
-            <div class="job-content">
-                <h3>${jobName}</h3>
-
-                <p class="company">New Applied Job</p>
-
-                <p class="job-meta">Added from your applications</p>
-
-                <span class="status applied">Applied</span>
-
-                <button class="btn disabled">Applied</button>
+            <div class="jobs-container">
+                {% for app in applications %}
+                <article class="job-card">
+                    <!-- Note: If your model uses title instead of name, change app.job.name to app.job.title -->
+                    <h3>{{ app.job.name }}</h3> 
+                    
+                    <p><strong>Status:</strong> <span class="status {{ app.job.status|lower }}">{{ app.job.status }}</span></p>
+                    <p class="job-meta">You applied for this job!</p>
+                    
+                    <a href="{% url 'job_details' app.job.id %}">
+                        <button class="btn-secondary">View Details</button>
+                    </a>
+                </article>
+                {% empty %}
+                    <h3 style="text-align: center; width: 100%;">You haven't applied to any jobs yet!</h3>
+                {% endfor %}
             </div>
         </div>
-        `;
-    });
 
-    });
-    </script>
+        <footer>
+            &copy; 2026 JobFinder. All rights reserved.
+        </footer>
     </body>
 </html>
