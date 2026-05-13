@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Applied Jobs</title>
-        <link rel="stylesheet" href="cssFiles/style.css">
+        <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
     </head>
 
     <body>
@@ -18,10 +18,10 @@
 
             <nav class="nav-bar" id="nav-menu">   
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="jobs.html">Find Jobs</a></li>
-                    <li><a href="applied-jobs.html">Applied Jobs</a></li>
-                    <li><a href="index.html"><button>Logout</button></a></li>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'jobs' %}">Find Jobs</a></li>
+                    <li><a href="{% url 'applied_jobs' %}">Applied Jobs</a></li>
+                    <li><a href="{% url 'login' %}"><button>Logout</button></a></li>
                 </ul>
             </nav>
         </header>
@@ -41,12 +41,10 @@
     let appliedJobs = JSON.parse(localStorage.getItem("appliedJobs")) || [];
     let container = document.querySelector(".job-list");
 
-    // لو مفيش تقديمات
     if(appliedJobs.length === 0){
         return;
     }
 
-    // إضافة jobs الجديدة (مش لمس الـ static)
     appliedJobs.forEach(jobName => {
 
         container.innerHTML += `

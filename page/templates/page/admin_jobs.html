@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cssFiles/style.css">
-     <link rel="stylesheet" href="cssFiles/admin-jobs.css">
+    <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
+     <link rel="stylesheet" href="{% static 'cssFiles/admin-jobs.css' %}">
     <title>Admin - Manage Jobs</title>
 </head>
 
@@ -19,11 +19,11 @@
 
         <nav class="nav-bar" id="nav-menu">   
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="admin-dashboard.html">Dashboard</a></li>
-                <li><a href="admin-jobs.html">Company Jobs</a></li>
-                <li><a href="add-job.html">Add New Job</a></li>
-                <li><a href="index.html">Logout</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'admin_jobs' %}">Company Jobs</a></li>
+                <li><a href="{% url 'add_job' %}">Add New Job</a></li>
+                <li><a href="{% url 'index' %}">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -33,13 +33,13 @@
     <aside>
         <h3>Admin Panel</h3>
         <ul>
-            <li><a href="admin-dashboard.html">📊 Dashboard Overview</a></li>
-            <li><a href="admin-jobs.html" class="active-link">💼 Manage Jobs</a></li>
-            <li><a href="add-job.html">➕ Add New Job</a></li>
-            <li><a href="applied-jobs.html">📩 Applied Jobs</a></li> 
-            <li><a href="jobs.html" target="_blank">🌐 View Site (Jobs)</a></li>
-            <li><a href="index.html">🏠 Home Page</a></li>
-            <li><a href="login.html" style="color: #991b1b;">🚪 Logout</a></li>
+            <li><a href="{% url 'admin_dashboard' %}">📊 Dashboard Overview</a></li>
+            <li><a href="{% url 'admin_jobs' %}">💼 Manage Jobs</a></li>
+            <li><a href="{% url 'add_job' %}">➕ Add New Job</a></li>
+            <li><a href="{% url 'applied_jobs' %}">📩 Applied Jobs</a></li>
+            <li><a href="{% url 'jobs' %}" target="_blank">🌐 View Site (Jobs)</a></li>
+            <li><a href="{% url 'index' %}">🏠 Home Page</a></li>
+           <li><a href="{% url 'login' %}" style="color: #991b1b;">🚪 Logout</a></li>
         </ul>
     </aside>
 
@@ -67,8 +67,8 @@
     <footer>
         &copy; 2026 JobFinder. All rights reserved.
     </footer>
-    <script src="jsFiles/main.js"></script>
-   <script src="jsFiles/admin.js"></script>
+        <script src="{% static 'jsFiles/main.js' %}"></script>
+        <script src="{% static 'jsFiles/admin.js' %}"></script>
 </body>
 
 </html>

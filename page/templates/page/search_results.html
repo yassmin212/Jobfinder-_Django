@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Search Results</title>
-        <link rel="stylesheet" href="cssFiles/style.css">
+        <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
     </head>
 
     <body>
@@ -18,10 +18,10 @@
 
         <nav class="nav-bar" id="nav-menu">   
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="jobs.html">Find Jobs</a></li>
-                    <li><a href="applied-jobs.html">Applied Jobs</a></li>
-                    <li><a href="index.html"><button>Logout</button></a></li>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'jobs' %}">Find Jobs</a></li>
+                    <li><a href="{% url 'applied_jobs' %}">Applied Jobs</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
                 </ul>
             </nav>
         </header>
@@ -126,6 +126,6 @@
     <footer class="footer">
         &copy; 2026 JobFinder. All rights reserved.
     </footer>
-    <script src="jsFiles/main.js"></script>
+    <script src="{% static 'jsFiles/main.js' %}"></script>
 </body>
 </html>
