@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
 from jobs.models import Job
 
 def index(request):
@@ -61,5 +62,5 @@ def jobs(request):
     return render(request, 'page/jobs.html', context)
 
 def job_details(request, id):
-    job = Job.objects.get(id=id)
+    job = get_object_or_404(Job, id=id)
     return render(request, 'page/job_details.html', {'job': job})
