@@ -1,9 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User # Make sure this is imported
 
-# Create your models here.
-class Applictions(models.Model):
-    user = models.CharField(max_length=50)
-    job = models.CharField(max_length=50)
+
+
+class Application(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE) # This links to Job model
 
     def __str__(self):
-        return f"{self.user} - {self.job}"
+        return f"{self.user.username} - {self.job.title}"
