@@ -8,10 +8,8 @@
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet"
-          href="/static/cssFiles/jobs.css">
-          <script src="/static/jsFiles/jobs.js" defer></script>
+    <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
+    <link rel="stylesheet" href="{% static 'cssFiles/jobs.css' %}">
 
     <title>Browse Jobs</title>
 
@@ -265,9 +263,7 @@ data-status="{{ job.status|lower }}">
     All rights reserved.
 
 </footer>
-
-
-
+<script src="{% static 'jsFiles/jobs.js' %}"></script>
 </body>
 
 </html>
