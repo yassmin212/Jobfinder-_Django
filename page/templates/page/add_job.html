@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="cssFiles/add-job-style.css">
+    <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
     <!-- <link rel="stylesheet" href="cssFiles/style.css"> -->
     
 
@@ -24,11 +25,11 @@
 
     <nav class="nav-bar" id="nav-menu">        
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="admin-dashboard.html">Dashboard</a></li>
-            <li><a href="admin-jobs.html">Company Jobs</a></li>
-            <li><a href="add-job.html">Add New Job</a></li>
-            <li><a href="index.html">Logout</a></li>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'admin_dashboard'%}">Dashboard</a></li>
+            <li><a href="{% url 'admin_jobs' %}">Company Jobs</a></li>
+            <li><a href="{% url 'add_job' %}">Add New Job</a></li>
+            <li><a href="{% url 'index' %}">Logout</a></li>
         </ul>
     </nav>
 </header>
@@ -79,7 +80,7 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script_addJob.js"></script>
+<script src="{% static 'script_addJob.js' %}"></script>
 
 <footer class="text-center mt-5">
     &copy; 2026 JobFinder. All rights reserved.

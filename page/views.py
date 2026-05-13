@@ -35,3 +35,6 @@ def search_results(request):
 
 def signup(request):
     return render(request, 'page/signup.html')
+
+def jobs(request):
+    return render(request, 'page/jobs.html')

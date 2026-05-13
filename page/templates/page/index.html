@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Job Finder</title>
         <meta name="description" content="Search thousands of jobs opportunities in one place!">
-        <link rel="stylesheet" href="cssFiles/style.css">
-        <link rel="stylesheet" href="cssFiles/index.css">
+        <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
+        <link rel="stylesheet" href="{% static 'cssFiles/index.css' %}">
     </head>
 
    <body>
@@ -20,11 +21,11 @@
 
             <nav class="nav-bar" id="nav-menu">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="#features">About</a></li>
-                    <li><a href="jobs.html">Find Jobs</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="signup.html">Sign Up</a></li>
+                    <li><a href="{% url 'jobs' %}">Find Jobs</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
                 </ul>
             </nav>
         </header>
@@ -33,7 +34,7 @@
             <!-- background img will be implemented in css -->
             <h1>Make your Career now!</h1>
             <h2>Find your dream job, Connect with inspiring companies instantly.</h2>
-         <form action="jobs.html" method="GET">
+         <form action="{% url 'jobs' %}" method="GET">
 
 <input 
 name="title"
@@ -82,8 +83,8 @@ min="0">
             &copy; 2026 JobFinder. All rights reserved.
         </footer>
 
-        <script src="jsFiles/main.js"></script>
-        <script src="jsFiles/index.js"></script>
+        <script src="{% static 'jsFiles/main.js' %}"></script>
+        <script src="{% static 'jsFiles/index.js' %}"></script>
 
     </body>
 </html>

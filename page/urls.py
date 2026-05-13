@@ -21,4 +21,6 @@ urlpatterns = [
 
     path('applied-jobs/', views.applied_jobs, name='applied_jobs'),
 
+    path('jobs/', views.jobs, name='jobs'),
+
 ]
