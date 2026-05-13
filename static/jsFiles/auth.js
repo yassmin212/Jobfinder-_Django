@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 msgBox.style.color = "green";
                 
                 // For now, assume login goes to normal jobs page. 
-                setTimeout(() => { window.location.href = "index.html";}, 1000);
+                setTimeout(() => { window.location.href = "/";}, 1000);
             }
         });
     }
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 msgBox.style.color = "green";
                 
                 // Redirects to admin.html (Yasmine/Hamza will build this page)
-                setTimeout(() => { window.location.href = "index.html"; }, 1500);
+                setTimeout(() => { window.location.href = "/"; }, 1500);
             } else {
                 // Save "user" to browser memory
                 localStorage.setItem("userRole", "user");
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 msgBox.style.color = "green";
                 
                 // Redirects to normal jobs page
-                setTimeout(() => { window.location.href = "index.html"; }, 1500);
+                setTimeout(() => { window.location.href = "/"; }, 1500);
             }
         });
     }

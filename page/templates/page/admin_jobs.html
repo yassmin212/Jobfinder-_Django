@@ -43,10 +43,12 @@
         </ul>
     </aside>
 
-    <main class="admin-main-jobs">
+    <main class="admin-main-jobs" data-jobs-from-server>
         <h2 style="text-align: center; margin-bottom: 20px;">Admin Overview</h2>
-        
-        <h3>Current Job Vacancies</h3>  
+
+        <p class="text-center mb-3"><a href="{% url 'add_job' %}">➕ Add new job</a></p>
+
+        <h3>Current Job Vacancies</h3>
         <table>
             <thead>
                 <tr>
@@ -58,8 +60,22 @@
                 </tr>
             </thead>
             <tbody>
-            
-                </tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td>{{ job.id }}</td>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.salary }} EGP</td>
+                    <td><span class="status {{ job.status|lower }}">{{ job.status }}</span></td>
+                    <td class="button">
+                        <a href="{% url 'job_details' job.id %}"><button type="button" class="btn-secondary">View</button></a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align: center;">No jobs yet. <a href="{% url 'add_job' %}">Add a job</a>.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </main>
 
@@ -68,7 +84,6 @@
         &copy; 2026 JobFinder. All rights reserved.
     </footer>
         <script src="{% static 'jsFiles/main.js' %}"></script>
-        <script src="{% static 'jsFiles/admin.js' %}"></script>
 </body>
 
 </html>

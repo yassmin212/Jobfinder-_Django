@@ -20,12 +20,12 @@
 
     <div class="menu-icon" id="menu-btn">&#9776;</div>
 
-    <nav class="nav-bar" id="nav-menu">   
+    <nav class="nav-bar" id="nav-menu">
         <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
-            <li><a href="admin-jobs.html">Company Jobs</a></li>
-            <li><a href="add-job.html">Add New Job</a></li>
+            <li><a href="{% url 'admin_jobs' %}">Company Jobs</a></li>
+            <li><a href="{% url 'add_job' %}">Add New Job</a></li>
 
             <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
@@ -44,12 +44,12 @@
                 </a>
             </li>
 
-            <li><a href="admin-jobs.html">💼 Manage Jobs</a></li>
-            <li><a href="add-job.html">➕ Add New Job</a></li>
-            <li><a href="applied-jobs.html">📩 Applied Jobs</a></li> 
+            <li><a href="{% url 'admin_jobs' %}">💼 Manage Jobs</a></li>
+            <li><a href="{% url 'add_job' %}">➕ Add New Job</a></li>
+            <li><a href="{% url 'applied_jobs' %}">📩 Applied Jobs</a></li>
 
-            <li><a href="/jobs/" target="_blank">🌐 View Site (Jobs)</a></li>
-            <li><a href="index.html">🏠 Home Page</a></li>
+            <li><a href="{% url 'jobs' %}" target="_blank">🌐 View Site (Jobs)</a></li>
+            <li><a href="{% url 'index' %}">🏠 Home Page</a></li>
 
             <li>
                 <a href="{% url 'logout' %}" style="color: #991b1b;">
@@ -72,12 +72,12 @@
 
             <div class="card">
                 <h3>Number of Open Jobs</h3>
-                <p><strong>0</strong></p>
+                <p><strong data-from-server="1" id="open-jobs-count">{{ open_jobs_count }}</strong></p>
             </div>
 
             <div class="card">
                 <h3>Number of Closed Jobs</h3>
-                <p><strong>0</strong></p>
+                <p><strong data-from-server="1" id="closed-jobs-count">{{ closed_jobs_count }}</strong></p>
             </div>
 
             <div class="card">

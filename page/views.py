@@ -1,19 +1,78 @@
-from django.shortcuts import get_object_or_404, render
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_http_methods
 
 from jobs.models import Job
+
+
+def _superuser_only(user):
+    return user.is_authenticated and user.is_superuser
 
 
 def index(request):
     return render(request, "page/index.html")
 
 
+@login_required(login_url="/login/")
+@user_passes_test(_superuser_only)
+@require_http_methods(["GET", "POST"])
 def add_job(request):
-    return render(request, "page/add_job.html")
+    if request.method == "POST":
+        name = (request.POST.get("name") or "").strip()
+        company = (request.POST.get("company") or "").strip()
+        salary_raw = request.POST.get("salary") or "0"
+        experience_raw = request.POST.get("experience") or "0"
+        status = (request.POST.get("status") or "open").strip().lower()
+        job_type = (request.POST.get("job_type") or "Full-time").strip()
+        description = (request.POST.get("description") or "").strip()
+        responsibilities = (request.POST.get("responsibilities") or "").strip()
+        requirements = (request.POST.get("requirements") or "").strip()
+
+        if not name or not company:
+            messages.error(request, "Job name and company are required.")
+            return redirect("add_job")
+        try:
+            salary = int(salary_raw)
+            experience = int(experience_raw)
+        except ValueError:
+            messages.error(request, "Salary and experience must be numbers.")
+            return redirect("add_job")
+
+        if status not in ("open", "closed"):
+            status = "open"
+
+        Job.objects.create(
+            name=name[:100],
+            company=company[:100],
+            salary=salary,
+            experience=experience,
+            job_type=job_type[:50],
+            status=status,
+            description=description
+            or "Details will be provided by the employer.",
+            responsibilities=responsibilities or "—",
+            requirements=requirements or "—",
+            posted_date=timezone.now().date(),
+        )
+        messages.success(request, "Job added successfully.")
+        return redirect("add_job")
+
+    recent_jobs = Job.objects.order_by("-id")[:10]
+    return render(
+        request,
+        "page/add_job.html",
+        {"recent_jobs": recent_jobs},
+    )
 
 
+@login_required(login_url="/login/")
+@user_passes_test(_superuser_only)
 def admin_jobs(request):
-    return render(request, "page/admin_jobs.html")
+    jobs = Job.objects.all().order_by("-id")
+    return render(request, "page/admin_jobs.html", {"jobs": jobs})
 
 
 def edit_job(request):

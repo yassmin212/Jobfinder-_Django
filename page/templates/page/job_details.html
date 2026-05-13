@@ -13,12 +13,7 @@
             <div><h1 class="logo">Job<span>Finder</span></h1></div>
             <div class="menu-icon" id="menu-btn">&#9776;</div>
             <nav class="nav-bar" id="nav-menu">
-                <ul>
-                    <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'jobs' %}">Find Jobs</a></li>
-                    <li><a href="{% url 'applied_jobs' %}">Applied Jobs</a></li>
-                    <li><a href="{% url 'logout' %}"><button>Logout</button></a></li>
-                </ul>
+                {% include "page/partials/nav_main.html" with show_about=False wrap_logout_button=True %}
             </nav>
         </header>
         <!-- ================= JOB DETAILS ================= -->
@@ -67,8 +62,21 @@
                 <!-- ===== Apply Section ===== -->
                 <section class="apply-section">
                     {% csrf_token %}
-                    <button id="apply-btn" data-url="{% url 'apply_job' job.id %}" class="btn-primary">Apply Now</button>
-                    <a href="/jobs/" class="back-btn">Back to Jobs</a>
+                    {% if job.status|lower == 'closed' %}
+                        <p class="apply-closed-msg" role="status" style="margin-bottom: 12px; font-weight: 600;">
+                            This job is closed. Applications are no longer accepted.
+                        </p>
+                        <button type="button" class="btn-primary" disabled style="opacity: 0.65; cursor: not-allowed;">
+                            Cannot apply
+                        </button>
+                    {% elif user.is_authenticated %}
+                        <button id="apply-btn" data-url="{% url 'apply_job' job.id %}" class="btn-primary">Apply Now</button>
+                    {% else %}
+                        <p style="margin-bottom: 12px;">
+                            <a href="{% url 'login' %}">Log in</a> to apply for this job.
+                        </p>
+                    {% endif %}
+                    <a href="{% url 'jobs' %}" class="back-btn">Back to Jobs</a>
                 </section>
             </article>
         </section>
@@ -77,12 +85,12 @@
             All rights reserved.
         </footer>
         <script src="{% static 'jsFiles/jobs.js' %}"></script>
-        
+
+{% if job.status|lower != 'closed' and user.is_authenticated %}
 <script>
     document.getElementById('apply-btn').addEventListener('click', function() {
         const applyUrl = this.getAttribute('data-url');
-        
-        // This sends the request to your Django view without reloading the page!
+
         fetch(applyUrl, {
             method: 'POST',
             credentials: 'same-origin',
@@ -94,16 +102,17 @@
         .then(response => response.json())
         .then(data => {
             if(data.status === "success") {
-                alert(data.message); // Shows "Application submitted successfully!"
-                this.innerText = "Applied"; // Changes button text
-                this.disabled = true; // Disables the button
-                this.style.backgroundColor = "green"; // Turns button green
+                alert(data.message);
+                this.innerText = "Applied";
+                this.disabled = true;
+                this.style.backgroundColor = "green";
             } else {
-                alert(data.message); // Shows "You already applied" or error
+                alert(data.message);
             }
         })
         .catch(error => console.error('Error:', error));
     });
 </script>
+{% endif %}
     </body>
 </html>

@@ -74,11 +74,17 @@ def admin_dashboard(request):
         return redirect("login")
 
     users_count = User.objects.count()
+    open_jobs_count = Job.objects.filter(status__iexact="open").count()
+    closed_jobs_count = Job.objects.filter(status__iexact="closed").count()
 
     return render(
         request,
         "application/admin-dashboard.html",
-        {"users_count": users_count},
+        {
+            "users_count": users_count,
+            "open_jobs_count": open_jobs_count,
+            "closed_jobs_count": closed_jobs_count,
+        },
     )
 
 
@@ -89,6 +95,14 @@ def apply_for_job(request, job_id):
         job = Job.objects.get(id=job_id)
     except Job.DoesNotExist:
         return JsonResponse({"status": "error", "message": "Job not found."})
+
+    if (job.status or "").strip().lower() == "closed":
+        return JsonResponse(
+            {
+                "status": "error",
+                "message": "This job is closed. Applications are no longer accepted.",
+            }
+        )
 
     user = request.user
 

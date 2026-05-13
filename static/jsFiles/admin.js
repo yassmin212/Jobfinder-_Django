@@ -20,14 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const closedEl = document.getElementById("closed-jobs-count");
 
        
-        if (openEl) openEl.innerText = openJobs;
-        if (closedEl) closedEl.innerText = closedJobs;
+        if (openEl && !openEl.hasAttribute("data-from-server")) {
+            openEl.innerText = openJobs;
+        }
+        if (closedEl && !closedEl.hasAttribute("data-from-server")) {
+            closedEl.innerText = closedJobs;
+        }
     }
 
     
     function renderAdminTable() {
         const tbody = document.querySelector(".admin-main-jobs table tbody");
-        if (!tbody) return; 
+        if (!tbody) return;
+        if (document.querySelector(".admin-main-jobs[data-jobs-from-server]")) {
+            return;
+        } 
 
         const jobs = getJobs();
         tbody.innerHTML = ""; 
