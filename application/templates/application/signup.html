@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
+
+    <title>Signup - JobFinder</title>
+
+    <style>
+        .msg {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1 class="logo">Job<span>Finder</span></h1>
+    </div>
+
+    <div class="menu-icon" id="menu-btn">&#9776;</div>
+
+    <nav class="nav-bar" id="nav-menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/jobs/">Find Jobs</a></li>
+            <li><a href="/application/login/">Login</a></li>
+            <li><a href="/application/signup/">Sign Up</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    {% if error %}
+        <div class="msg">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <table>
+
+            <tr>
+                <td>
+                    <label>Username</label>
+                </td>
+
+                <td>
+                    <input
+                        type="text"
+                        name="username"
+                        required
+                    >
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label>Email</label>
+                </td>
+
+                <td>
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                    >
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label>Password</label>
+                </td>
+
+                <td>
+                    <input
+                        type="password"
+                        name="password"
+                        required
+                    >
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+
+                <td>
+                    <input type="submit" value="Sign Up">
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+
+    <p>
+        <a href="/application/login/">
+            Already have an account?
+        </a>
+    </p>
+
+</main>
+
+<footer>
+    &copy; 2026 JobFinder. All rights reserved.
+</footer>
+
+<script src="{% static 'jsFiles/main.js' %}"></script>
+
+</body>
+</html>
