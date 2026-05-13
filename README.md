@@ -22,8 +22,60 @@ This project was built for a **Web Technology** course (Phase 3: implement the s
 ## Tech stack
 
 - **Python 3** + **Django 6** ([Django documentation](https://docs.djangoproject.com/en/stable/))
-- **SQLite** (default `db.sqlite3`)
+- **SQLite** locally (`db.sqlite3`); **PostgreSQL** when `DATABASE_URL` is set (e.g. on Render)
+- **Gunicorn** + **WhiteNoise** for production-style serving
 - **Templates + static** CSS/JS (Bootstrap used on the add-job page)
+
+---
+
+## Go live (production-ready layout)
+
+The repo is wired for a typical **PaaS** deploy (e.g. [Render](https://render.com/), [Railway](https://railway.app/)): environment variables, static files via WhiteNoise, and `gunicorn` as the HTTP server.
+
+### 1. Install dependencies locally (includes production packages)
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Environment variables
+
+Copy `.env.example` to `.env` for local experiments (optional). On the host, set at least:
+
+| Variable | Example | Notes |
+|----------|---------|--------|
+| `DJANGO_DEBUG` | `False` | Required for public sites |
+| `DJANGO_SECRET_KEY` | long random string | Never commit real values |
+| `DJANGO_ALLOWED_HOSTS` | `your-app.onrender.com` | Comma-separated, no `https://` |
+| `DJANGO_CSRF_TRUSTED_ORIGINS` | `https://your-app.onrender.com` | Comma-separated **with** `https://` |
+| `DATABASE_URL` | *(optional)* Postgres URL | If unset, SQLite is used |
+
+If `DJANGO_DEBUG=False` and `DJANGO_SECRET_KEY` is missing, Django will **refuse to start** (by design).
+
+### 3. Static files
+
+Production builds run:
+
+```bash
+python manage.py collectstatic --no-input
+```
+
+(Render does this in `buildCommand` in `render.yaml`.)
+
+### 4. Deploy on Render (example)
+
+1. Push this repo to **GitHub**.  
+2. In Render: **New → Blueprint** (or **Web Service**) and point at the repo.  
+3. If you use the included `render.yaml`, after the first deploy open the service → **Environment** and set:
+   - `DJANGO_ALLOWED_HOSTS` = your service hostname (e.g. `jobfinder-xxxx.onrender.com`)
+   - `DJANGO_CSRF_TRUSTED_ORIGINS` = `https://jobfinder-xxxx.onrender.com`  
+4. **Redeploy**. Create a superuser from Render **Shell**: `python manage.py createsuperuser`.
+
+**Free tier note:** SQLite on a free web instance is OK for demos; the filesystem can reset when the instance restarts. For data you cannot lose, add **Render Postgres** (or similar) and set `DATABASE_URL`.
+
+### 5. Other hosts
+
+- **Railway / Fly.io**: same env vars; start command is effectively `gunicorn myproject.wsgi:application --bind 0.0.0.0:$PORT` (see `Procfile`).
 
 ---
 
