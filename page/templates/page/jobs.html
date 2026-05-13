@@ -1,269 +1,107 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
-    <link rel="stylesheet" href="{% static 'cssFiles/jobs.css' %}">
-
-    <title>Browse Jobs</title>
-
-</head>
-
-<body>
-
-<header>
-
-    <div>
-        <h1 class="logo">
-            Job<span>Finder</span>
-        </h1>
-    </div>
-
-    <div class="menu-icon" id="menu-btn">
-        &#9776;
-    </div>
-
-    <nav class="nav-bar" id="nav-menu">
-
-        <ul>
-
-            <li>
-                <a href="/">Home</a>
-            </li>
-
-            <li>
-                <a href="/jobs/">Find Jobs</a>
-            </li>
-
-            <li>
-                <a href="#">Applied Jobs</a>
-            </li>
-
-            <li>
-                <a href="/">
-                    <button>Logout</button>
-                </a>
-            </li>
-
-        </ul>
-
-    </nav>
-
-</header>
-
-<!-- ================= SEARCH SECTION ================= -->
-
-<section class="search-section">
-
-    <h2>Find Your Next Job</h2>
-
-    <form class="search-form" method="GET">
-
-        <!-- Job Title -->
-
-        <div class="form-group">
-
-            <label for="jobTitle">
-
-                Job Title
-
-            </label>
-
-            <input type="text"
-                   id="jobTitle"
-                   name="title"
-                   value="{{ title }}"
-                   placeholder="Enter job title">
-
-        </div>
-
-        <!-- Experience -->
-
-        <div class="form-group">
-
-            <label for="experience">
-
-                Years of Experience
-
-            </label>
-
-            <input type="number"
-                   id="experience"
-                   name="experience"
-                   value="{{ experience }}"
-                   min="0"
-                   placeholder="0">
-
-        </div>
-
-        <!-- Status -->
-
-        <div class="form-group">
-
-            <label>Status</label>
-
-            <select id="statusFilter"
-                    name="status">
-
-                <option value="all"
-
-                {% if status == "all" %}
-                selected
-                {% endif %}>
-
-                All
-
-                </option>
-
-                <option value="open"
-
-                {% if status == "open" %}
-                selected
-                {% endif %}>
-
-                Open
-
-                </option>
-
-                <option value="closed"
-
-                {% if status == "closed" %}
-                selected
-                {% endif %}>
-
-                Closed
-
-                </option>
-
-            </select>
-
-        </div>
-
-        <!-- Search Button -->
-
-        <div class="form-group">
-
-            <button type="submit"
-                    class="btn-primary">
-
-                Search
-
-            </button>
-
-        </div>
-
-    </form>
-
-</section>
-
-<!-- ================= JOBS LIST ================= -->
-
-<section class="jobs-container">
-  
-
-{% for job in jobs %}
-
-<article class="job-card"
-
-data-title="{{ job.name }}"
-data-experience="{{ job.experience }}"
-data-status="{{ job.status|lower }}">
-
-    <h3>
-
-        {{ job.name }}
-
-    </h3>
-
-    <p class="posted-date">
-
-        <strong>Posted:</strong>
-
-        22 Feb 2026
-
-    </p>
-
-    <p>
-
-        <strong>Company:</strong>
-
-        {{ job.company }}
-
-    </p>
-
-    <p>
-
-        <strong>Salary:</strong>
-
-        {{ job.salary }} EGP
-
-    </p>
-
-    <p>
-
-        <strong>Experience Required:</strong>
-
-        {{ job.experience }} Years
-
-    </p>
-
-    <p>
-
-        <strong>Job Type:</strong>
-
-        {{ job.job_type }}
-
-    </p>
-
-    <p>
-
-        <strong>Status:</strong>
-
-        <span class="status {{ job.status|lower }}">
-
-            {{ job.status }}
-
-        </span>
-
-    </p>
-
-    <a href="{% url 'job_details' job.id %}">
-
-        <button class="btn-secondary">
-
-            View Details
-
-        </button>
-
-    </a>
-
-</article>
-
-{% empty %}
-
-<h3 id="noJobsMessage">
-
-    ⚠ No Jobs Found
-
-</h3>
-
-{% endfor %}
-
-</section>
-
-<footer>
-
-    &copy; 2026 JobFinder.
-    All rights reserved.
-
-</footer>
-<script src="{% static 'jsFiles/jobs.js' %}"></script>
-</body>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'cssFiles/style.css' %}">
+        <link rel="stylesheet" href="{% static 'cssFiles/jobs.css' %}">
+        <title>Browse Jobs</title>
+    </head>
+    <body>
+    <header>
+        <div><h1 class="logo">Job<span>Finder</span></h1></div>
+        <div class="menu-icon" id="menu-btn">&#9776;</div>
+
+        <nav class="nav-bar" id="nav-menu">
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'jobs' %}">Find Jobs</a></li>
+                <li><a href="{% url 'applied_jobs' %}">Applied Jobs</a></li>
+                <li><a href="{% url 'login' %}"><button>Logout</button></a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- ================= SEARCH SECTION ================= -->
+    <section class="search-section">
+        <h2>Find Your Next Job</h2>
+        <form class="search-form" method="GET">
+            <!-- Job Title -->
+            <div class="form-group">
+                <label for="jobTitle">Job Title</label>
+
+                <input type="text"
+                       id="jobTitle"
+                       name="title"
+                       value="{{ title }}"
+                       placeholder="Enter job title">
+            </div>
+            <!-- Experience -->
+            <div class="form-group"><label for="experience">Years of Experience</label>
+                <input type="number"
+                       id="experience"
+                       name="experience"
+                       value="{{ experience }}"
+                       min="0"
+                       placeholder="0">
+
+            </div>
+            <!-- Status -->
+            <div class="form-group">
+                <label>Status</label>
+                <select id="statusFilter" name="status"><option value="all"
+                        {% if status == "all" %}
+                    selected
+                    {% endif %}>
+                    All
+                    </option>
+                    <option value="open"
+                    {% if status == "open" %}
+                    selected
+                    {% endif %}>
+                    Open
+                    </option>
+                    <option value="closed"
+                    {% if status == "closed" %}
+                    selected
+                    {% endif %}>
+                    Closed
+                    </option>
+                </select></div>
+            <!-- Search Button -->
+            <div class="form-group">
+                <button type="submit"
+                        class="btn-primary">
+                    Search
+                </button>
+            </div>
+        </form>
+    </section>
+    <!-- ================= JOBS LIST ================= -->
+    <section class="jobs-container">
+    {% for job in jobs %}
+    <article class="job-card"
+    data-title="{{ job.name }}"
+    data-experience="{{ job.experience }}"
+    data-status="{{ job.status|lower }}">
+        <h3>{{ job.name }}</h3>
+        <p class="posted-date"><strong>Posted:</strong>22 Feb 2026</p>
+        <p><strong>Company:</strong>{{ job.company }}</p>
+        <p><strong>Salary:</strong>{{ job.salary }} EGP</p>
+        <p><strong>Experience Required:</strong>{{ job.experience }} Years</p>
+        <p><strong>Job Type:</strong>{{ job.job_type }}</p>
+        <p><strong>Status:</strong><span class="status {{ job.status|lower }}">{{ job.status }}</span></p>
+        <a href="{% url 'job_details' job.id %}"><button class="btn-secondary">View Details</button></a>
+    </article>
+    {% empty %}
+    <h3 id="noJobsMessage">⚠ No Jobs Found</h3>
+    {% endfor %}
+    </section>
+    <footer>
+        &copy; 2026 JobFinder.
+        All rights reserved.
+    </footer>
+    <script src="{% static 'jsFiles/jobs.js' %}"></script>
+    </body>
 </html>
