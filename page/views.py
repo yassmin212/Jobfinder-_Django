@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
 
+from application.models import Application
 from jobs.models import Job
 
 
@@ -107,4 +108,13 @@ def jobs(request):
 @ensure_csrf_cookie
 def job_details(request, id):
     job = get_object_or_404(Job, id=id)
-    return render(request, "page/job_details.html", {"job": job})
+    has_applied = False
+    if request.user.is_authenticated:
+        has_applied = Application.objects.filter(
+            user=request.user, job=job
+        ).exists()
+    return render(
+        request,
+        "page/job_details.html",
+        {"job": job, "has_applied": has_applied},
+    )

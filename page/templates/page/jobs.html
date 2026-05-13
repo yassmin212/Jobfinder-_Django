@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{% static 'cssFiles/jobs.css' %}">
         <title>Browse Jobs</title>
     </head>
-    <body>
+    <body class="jobs-page">
     <header>
         <div><h1 class="logo">Job<span>Finder</span></h1></div>
         <div class="menu-icon" id="menu-btn">&#9776;</div>
@@ -18,8 +18,8 @@
             {% include "page/partials/nav_main.html" with show_about=False wrap_logout_button=True %}
         </nav>
     </header>
-    <!-- ================= SEARCH SECTION ================= -->
-    <section class="search-section">
+    <section class="page-shell">
+        <section class="search-section">
         <h2>Find Your Next Job</h2>
         <form class="search-form" method="GET">
             <!-- Job Title -->
@@ -72,26 +72,27 @@
                 </button>
             </div>
         </form>
-    </section>
-    <!-- ================= JOBS LIST ================= -->
-    <section class="jobs-container">
+        </section>
+
+        <section class="jobs-container">
     {% for job in jobs %}
     <article class="job-card"
     data-title="{{ job.name }}"
     data-experience="{{ job.experience }}"
     data-status="{{ job.status|lower }}">
         <h3>{{ job.name }}</h3>
-        <p class="posted-date"><strong>Posted:</strong>22 Feb 2026</p>
-        <p><strong>Company:</strong>{{ job.company }}</p>
-        <p><strong>Salary:</strong>{{ job.salary }} EGP</p>
-        <p><strong>Experience Required:</strong>{{ job.experience }} Years</p>
-        <p><strong>Job Type:</strong>{{ job.job_type }}</p>
-        <p><strong>Status:</strong><span class="status {{ job.status|lower }}">{{ job.status }}</span></p>
+        <p class="posted-date"><strong>Posted:</strong> {{ job.posted_date|date:"d M Y" }}</p>
+        <p><strong>Company:</strong> {{ job.company }}</p>
+        <p><strong>Salary:</strong> {{ job.salary }} EGP</p>
+        <p><strong>Experience:</strong> {{ job.experience }} years</p>
+        <p><strong>Job type:</strong> {{ job.job_type }}</p>
+        <p><strong>Status:</strong> <span class="status {{ job.status|lower }}">{{ job.status }}</span></p>
         <a href="{% url 'job_details' job.id %}"><button class="btn-secondary">View Details</button></a>
     </article>
     {% empty %}
     <h3 id="noJobsMessage">⚠ No Jobs Found</h3>
     {% endfor %}
+        </section>
     </section>
     <footer>
         &copy; 2026 JobFinder.

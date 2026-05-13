@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{% static 'cssFiles/jobs.css' %}">
         <title>{{ job.name }} | JobFinder</title>
     </head>
-        <body>
+    <body>
         <header>
             <div><h1 class="logo">Job<span>Finder</span></h1></div>
             <div class="menu-icon" id="menu-btn">&#9776;</div>
@@ -16,32 +16,26 @@
                 {% include "page/partials/nav_main.html" with show_about=False wrap_logout_button=True %}
             </nav>
         </header>
-        <!-- ================= JOB DETAILS ================= -->
         <section class="job-details-container">
             <article class="job-details-card">
-                <!-- ===== Header ===== -->
                 <header class="job-header">
                     <h2>{{ job.name }}</h2>
                     <p class="posted-date">{{ job.posted_date|date:"d M Y" }}</p>
                 </header>
-                <!-- ===== Job Information ===== -->
                 <section class="job-info-section">
                     <h3>Job Information</h3>
                     <div class="job-meta">
-                        <p><strong>Company:</strong>{{ job.company }}</p>
-                        <p><strong>Salary:</strong>{{ job.salary }} EGP</p>
-                        <p><strong>Experience Required:</strong>{{ job.experience }} Years</p>
-                        <p><strong>Job Type:</strong>{{ job.job_type }}</p>
-                        
-                        <p><strong>Status:</strong><span class="status {{ job.status|lower }}">{{ job.status }}</span></p>
+                        <p><strong>Company:</strong> {{ job.company }}</p>
+                        <p><strong>Salary:</strong> {{ job.salary }} EGP</p>
+                        <p><strong>Experience required:</strong> {{ job.experience }} years</p>
+                        <p><strong>Job type:</strong> {{ job.job_type }}</p>
+                        <p><strong>Status:</strong> <span class="status {{ job.status|lower }}">{{ job.status }}</span></p>
                     </div>
                 </section>
-                <!-- ===== Description ===== -->
                 <section class="job-description-section">
-                    <h3>Job Description</h3>
+                    <h3>Job description</h3>
                     <p>{{ job.description }}</p>
                 </section>
-                <!-- ===== Responsibilities ===== -->
                 <section class="job-section">
                     <h3>Responsibilities</h3>
                     <ul>
@@ -50,68 +44,91 @@
                         {% endfor %}
                     </ul>
                 </section>
-                <!-- ===== Requirements ===== -->
                 <section class="job-section">
                     <h3>Requirements</h3>
                     <ul>
-                    {% for line in job.requirements.splitlines %}
-                    <li>{{ line }}</li>
-                    {% endfor %}
+                        {% for line in job.requirements.splitlines %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
                     </ul>
                 </section>
-                <!-- ===== Apply Section ===== -->
                 <section class="apply-section">
                     {% csrf_token %}
                     {% if job.status|lower == 'closed' %}
-                        <p class="apply-closed-msg" role="status" style="margin-bottom: 12px; font-weight: 600;">
+                        <p class="apply-closed-msg" role="status">
                             This job is closed. Applications are no longer accepted.
                         </p>
-                        <button type="button" class="btn-primary" disabled style="opacity: 0.65; cursor: not-allowed;">
-                            Cannot apply
-                        </button>
+                        <button type="button" class="btn-primary" disabled>Cannot apply</button>
                     {% elif user.is_authenticated %}
-                        <button id="apply-btn" data-url="{% url 'apply_job' job.id %}" class="btn-primary">Apply Now</button>
+                        {% if has_applied %}
+                            <p class="apply-applied-msg" role="status">
+                                You have already applied for this job. You can withdraw your application below if you change your mind.
+                            </p>
+                            <button type="button" id="withdraw-btn" class="btn-withdraw" data-url="{% url 'withdraw_job' job.id %}">
+                                Withdraw application
+                            </button>
+                        {% else %}
+                            <button type="button" id="apply-btn" class="btn-primary" data-url="{% url 'apply_job' job.id %}">Apply now</button>
+                        {% endif %}
                     {% else %}
-                        <p style="margin-bottom: 12px;">
+                        <p class="apply-login-hint">
                             <a href="{% url 'login' %}">Log in</a> to apply for this job.
                         </p>
                     {% endif %}
-                    <a href="{% url 'jobs' %}" class="back-btn">Back to Jobs</a>
+                    <a href="{% url 'jobs' %}" class="back-btn">Back to jobs</a>
                 </section>
             </article>
         </section>
         <footer>
-            &copy; 2026 JobFinder.
-            All rights reserved.
+            &copy; 2026 JobFinder. All rights reserved.
         </footer>
         <script src="{% static 'jsFiles/jobs.js' %}"></script>
 
 {% if job.status|lower != 'closed' and user.is_authenticated %}
 <script>
-    document.getElementById('apply-btn').addEventListener('click', function() {
-        const applyUrl = this.getAttribute('data-url');
+(function () {
+    var tokenEl = document.querySelector('[name=csrfmiddlewaretoken]');
+    if (!tokenEl) return;
 
-        fetch(applyUrl, {
+    function postAction(url, onSuccess) {
+        fetch(url, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                'X-CSRFToken': tokenEl.value
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            if(data.status === "success") {
-                alert(data.message);
-                this.innerText = "Applied";
-                this.disabled = true;
-                this.style.backgroundColor = "green";
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data.status === 'success') {
+                if (onSuccess) onSuccess(data.message);
+                window.location.reload();
             } else {
                 alert(data.message);
             }
         })
-        .catch(error => console.error('Error:', error));
-    });
+        .catch(function (err) {
+            console.error(err);
+            alert('Something went wrong. Please try again.');
+        });
+    }
+
+    var applyBtn = document.getElementById('apply-btn');
+    if (applyBtn) {
+        applyBtn.addEventListener('click', function () {
+            postAction(applyBtn.getAttribute('data-url'), function (msg) { alert(msg); });
+        });
+    }
+
+    var withdrawBtn = document.getElementById('withdraw-btn');
+    if (withdrawBtn) {
+        withdrawBtn.addEventListener('click', function () {
+            if (!confirm('Withdraw your application for this job?')) return;
+            postAction(withdrawBtn.getAttribute('data-url'), function (msg) { alert(msg); });
+        });
+    }
+})();
 </script>
 {% endif %}
     </body>

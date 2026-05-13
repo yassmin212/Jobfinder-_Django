@@ -40,7 +40,7 @@ header {
     font-weight:bold;
 }
 
-span {
+.logo span {
     color: #7b4aa1;
 }
 
@@ -85,76 +85,145 @@ footer {
     margin-top: auto;
 }
 
-.search-section{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
-width:350px;
-margin:20px auto;
-text-align:center;
-}
-.search-section input{
-width:100%;
-padding:8px;
-margin:8px 0;
-border-radius:5px;
-border:1px solid #ccc;
-}
-.search-section button{
-width:100%;
-margin-top:10px;
-padding:10px 15px;
-border:none;
-border-radius:6px;
-background-color:#7b4aa1;
-color:white;
-cursor:pointer;
-}
-.search-section button:hover{
-background:#6500b3;
+.search-section {
+    background: #fff;
+    padding: 1.75rem 1.75rem 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(123, 74, 161, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    max-width: min(520px, 92vw);
+    margin: 1.5rem auto 0.5rem;
+    text-align: left;
+    border: 1px solid rgba(123, 74, 161, 0.1);
 }
 
-.jobs-container{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-padding:20px;
-max-width:1000px;
-margin:auto;
+.search-section h2 {
+    text-align: center;
+    font-size: 1.35rem;
+    color: #111827;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
 }
-.job-card{
-padding:25px;
-border-radius:12px;
-background:white;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-transition: all 0.3s ease;
+
+.search-section .form-group {
+    margin-bottom: 1rem;
+    text-align: left;
 }
-.job-card:hover{
-transform: translateY(-5px);
-box-shadow:0 6px 16px rgba(0,0,0,0.15);
+
+.search-section .form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #374151;
+    margin-bottom: 0.35rem;
 }
-.job-card h3{
-font-size:22px;
-margin-bottom:10px;
-color:#111827;
+
+.search-section input,
+.search-section select {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    margin: 0;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
 }
-.job-card p{
-margin:6px 0;
-font-size:15px;
-color:#374151;
+
+.search-section input:focus,
+.search-section select:focus {
+    border-color: #7b4aa1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(123, 74, 161, 0.15);
 }
-.job-card strong{
-color:#111827;
+
+.search-section button {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #7b4aa1 0%, #6b3d91 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(123, 74, 161, 0.35);
+    transition: transform 0.15s, box-shadow 0.2s;
 }
-.job-card h3::after{
-content:"";
-display:block;
-width:50px;
-height:3px;
-background-color:#7b4aa1;
-margin-top:6px;
-border-radius:2px;
+
+.search-section button:hover {
+    background: #6500b3;
+    transform: translateY(-1px);
+}
+
+.jobs-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 1.75rem;
+    padding: 1.5rem 5% 3rem;
+    max-width: 1180px;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+.job-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.75rem 1.85rem;
+    min-height: 280px;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(123, 74, 161, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+    border-color: rgba(123, 74, 161, 0.25);
+}
+
+.job-card h3 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    margin-bottom: 0.65rem;
+    color: #111827;
+    word-break: break-word;
+}
+
+.job-card p {
+    margin: 0.35rem 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: #4b5563;
+}
+
+.job-card strong {
+    color: #111827;
+    font-weight: 600;
+    margin-right: 0.25rem;
+}
+
+.job-card h3::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, #7b4aa1, #a78bfa);
+    margin-top: 0.5rem;
+    border-radius: 2px;
+}
+
+.job-card > a {
+    margin-top: auto;
+    padding-top: 1rem;
+    align-self: flex-start;
+}
+
+.job-card .posted-date {
+    font-size: 0.875rem;
+    color: #6b7280;
 }
 button{
 padding:10px 16px;
@@ -245,7 +314,8 @@ color:#991b1b;
   gap:15px;
 }
 
-.job-card{
+/* List variant only — do not use for grid job cards on /jobs/ */
+.job-list .job-card{
   display:flex;
   gap:15px;
   padding:18px;
@@ -267,7 +337,7 @@ color:#991b1b;
   flex:1;
 }
 
-.job-card h3{
+.job-list .job-card h3{
   font-size:18px;
   margin-bottom:5px;
 }
@@ -406,36 +476,114 @@ width:fit-content;
         gap: 20px;
     }
 }
-main {
-    background-color: white;
-    max-width: 450px; 
-    margin: 40px auto; 
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+/* Auth: main grows between header & footer; white panel is .auth-card only */
+main.auth-shell {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1.25rem 2.5rem;
+    width: 100%;
+    margin: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
 }
-/* LOGIN AND SIGNUP FORM STYLES (MAHER)    */
-main h3 { text-align: center; margin-top: 25px; color: #111827; }
-main p { text-align: center; margin-top: 10px; }
-main p a { color: #7b4aa1; text-decoration: none; font-weight: bold; }
-main p a:hover { text-decoration: underline; }
-main table { width: 100%; border-collapse: collapse; }
-main td { padding: 10px 0; }
-main td label { font-weight: 600; color: #374151; font-size: 14px; }
-main input[type="text"], 
-main input[type="password"], 
-main input[type="email"] {
-    width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; 
+
+main.auth-shell .auth-card {
+    width: 100%;
+    max-width: min(440px, 92vw);
+    background-color: #fff;
+    padding: 2.25rem 2rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(123, 74, 161, 0.12), 0 1px 3px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(123, 74, 161, 0.12);
 }
-main input[type="text"]:focus, 
-main input[type="password"]:focus {
-    border-color: #7b4aa1; outline: none;
+
+main.auth-shell .auth-card h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #111827;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
 }
-main input[type="submit"] {
-    width: 100%; background-color: #7b4aa1; color: white; border: none;
-    padding: 12px; font-size: 16px; font-weight: bold; border-radius: 6px; 
-    cursor: pointer; margin-top: 15px;
+
+main.auth-shell .auth-card h3 {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #374151;
+    font-size: 1rem;
+    font-weight: 600;
 }
-main input[type="submit"]:hover { background-color: #6500b3; }
+
+main.auth-shell .auth-card p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+main.auth-shell .auth-card p a {
+    color: #7b4aa1;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+main.auth-shell .auth-card p a:hover {
+    text-decoration: underline;
+    color: #6500b3;
+}
+
+.auth-field {
+    margin-bottom: 1.25rem;
+}
+
+.auth-field label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+    margin-bottom: 0.4rem;
+}
+
+.auth-field input[type="text"],
+.auth-field input[type="password"],
+.auth-field input[type="email"] {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-field input:focus {
+    border-color: #7b4aa1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(123, 74, 161, 0.2);
+}
+
+.auth-actions {
+    margin-top: 1.75rem;
+}
+
+.auth-actions input[type="submit"] {
+    width: 100%;
+    background: linear-gradient(135deg, #7b4aa1 0%, #6b3d91 100%);
+    color: #fff;
+    border: none;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(123, 74, 161, 0.35);
+}
+
+.auth-actions input[type="submit"]:hover {
+    background: #6500b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(123, 74, 161, 0.4);
+}
+
 .msg { font-weight: bold; margin-bottom: 20px; text-align: center; padding: 12px; border-radius: 6px; }

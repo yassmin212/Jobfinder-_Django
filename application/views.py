@@ -118,6 +118,30 @@ def apply_for_job(request, job_id):
 
 
 @login_required(login_url="/login/")
+@require_POST
+def withdraw_application(request, job_id):
+    try:
+        job = Job.objects.get(id=job_id)
+    except Job.DoesNotExist:
+        return JsonResponse({"status": "error", "message": "Job not found."})
+
+    deleted, _ = Application.objects.filter(user=request.user, job=job).delete()
+    if deleted == 0:
+        return JsonResponse(
+            {
+                "status": "error",
+                "message": "You do not have an application to withdraw for this job.",
+            }
+        )
+    return JsonResponse(
+        {
+            "status": "success",
+            "message": "Your application was withdrawn.",
+        }
+    )
+
+
+@login_required(login_url="/login/")
 def applied_jobs(request):
     my_applications = Application.objects.filter(user=request.user)
     return render(

@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="applied-page">
 
     <head>
         <meta charset="UTF-8">
@@ -19,30 +19,30 @@
             </nav>
         </header>
 
-        <div class="container" style="min-height: 60vh; padding: 40px;">
-            <h2 style="text-align: center; margin-bottom: 30px;">Applied Jobs</h2>
+        <section class="page-shell">
+            <h1 class="page-title">Applied Jobs</h1>
 
             <div class="jobs-container">
                 {% for app in applications %}
                 <article class="job-card">
-                    <!-- Note: If your model uses title instead of name, change app.job.name to app.job.title -->
-                    <h3>{{ app.job.name }}</h3> 
-                    
+                    <h3>{{ app.job.name }}</h3>
+
                     <p><strong>Status:</strong> <span class="status {{ app.job.status|lower }}">{{ app.job.status }}</span></p>
-                    <p class="job-meta">You applied for this job!</p>
-                    
+                    <p class="job-meta">You applied for this job.</p>
+
                     <a href="{% url 'job_details' app.job.id %}">
-                        <button class="btn-secondary">View Details</button>
+                        <button type="button" class="btn-secondary">View details</button>
                     </a>
                 </article>
                 {% empty %}
-                    <h3 style="text-align: center; width: 100%;">You haven't applied to any jobs yet!</h3>
+                <h3 class="applied-empty">You have not applied to any jobs yet. Browse <a href="{% url 'jobs' %}">open roles</a>.</h3>
                 {% endfor %}
             </div>
-        </div>
+        </section>
 
         <footer>
             &copy; 2026 JobFinder. All rights reserved.
         </footer>
+        <script src="{% static 'jsFiles/main.js' %}"></script>
     </body>
 </html>
