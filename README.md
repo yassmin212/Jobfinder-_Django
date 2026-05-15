@@ -140,7 +140,7 @@ Stop the server with **Ctrl+C** in the terminal.
 
 ---
 
-## Demo checklist (good for submissions)
+## Demo checklist 
 
 1. Register a normal user → log in → **Find Jobs** → open a job → **Apply** → **Applied Jobs** shows it.  
 2. Open the same job again → you should see **Withdraw application**, not **Apply now** → withdraw → **Apply now** returns.  
@@ -164,10 +164,18 @@ Phase 3 asks you to complete the site using Django. In this repo, server-rendere
 
 ## Authors / course
 
-Add your **team names**, **course code**, and **semester** here before you submit.
+## Authors / course
+
+**Team Members:**
+- Youssef Maher
+- Youssef Bilal
+- Hamza Shawky
+- Ziad Ahmed
+- Yassmin
+- Rawan
 
 ---
 
 ## License
-
-Specify your course policy (e.g. “All rights reserved” or an open license) before publishing publicly.
+This project was developed for academic purposes. All rights reserved. 
+Not to be reused or redistributed without permission.
