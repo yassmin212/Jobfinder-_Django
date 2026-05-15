@@ -162,7 +162,6 @@ Phase 3 asks you to complete the site using Django. In this repo, server-rendere
 
 ---
 
-## Authors / course
 
 ## Authors / course
 
