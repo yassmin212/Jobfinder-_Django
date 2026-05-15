@@ -152,7 +152,7 @@ Stop the server with **Ctrl+C** in the terminal.
 ## Environment and Git
 
 - Copy **`.env` / secrets** pattern for production; the repo uses dev defaults (`DEBUG=True`).  
-- **`.gitignore`** excludes `.venv/`, `db.sqlite3`, `__pycache__/`, `.idea/`, etc. Do not commit your virtualenv or local database if the course forbids it.
+- **`.gitignore`** excludes `.venv/`, `db.sqlite3`, `__pycache__/`, `.idea/`, etc. Do not commit your virtualenv or local database.
 
 ---
 
